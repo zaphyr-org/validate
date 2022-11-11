@@ -1,0 +1,67 @@
+{
+    "active": {
+        "url": "The %field% is not a valid URL"
+    },
+    "alpha": {
+        "chars": "The %field% must only contain letters",
+        "dash": "The %field% must only contain letters, numbers, dashes and underscores",
+        "num": "The %field% must only contain letters and numbers"
+    },
+    "array": "The %field% must be an array",
+    "ascii": "The %field% must only contain ASCII letters",
+    "between": {
+        "array": "The %field% must have between %min% and %max% items",
+        "number": "The %field% must be between %min% and %max%",
+        "string": "The %field% must be between %min% and %max% characters"
+    },
+    "bool": "The %field% field must be true or false",
+    "checked": "The %field% must be accepted",
+    "date": {
+        "after": "The %field% must be a date after %date%",
+        "before": "The %field% must be a date before %date%",
+        "equals": "The %field% must be equal to %date%",
+        "format": "The %field% does not match the format %format%",
+        "time": "The %field% is not a valid date"
+    },
+    "different": "The %field% and %other% must be different",
+    "digits": "The %field% must be %digits% digits",
+    "email": "The %field% must be a valid email address",
+    "ends": {
+        "with": "The %field% must end with one of the following: %values%",
+        "without": "The %field% must not end with one of the following: %values%"
+    },
+    "integer": "The %field% must be an integer",
+    "ip": "The %field% must be a valid IP address",
+    "ipv4": "The %field% must be a valid IPv4 address",
+    "ipv6": "The %field% must be a valid IPv6 address",
+    "json": "The %field% must be a valid JSON string",
+    "max": {
+        "array": "The %field% must not have more than %max% items",
+        "number": "The %field% must not be greater than %max%",
+        "string": "The %field% must not be greater than %max% characters"
+    },
+    "min": {
+        "array": "The %field% must have at least %min% items",
+        "number": "The %field% must be at least %min%",
+        "string": "The %field% must be at least %min% characters"
+    },
+    "not": {
+        "regex": "The %field% format is invalid"
+    },
+    "number": "The %field% must be a number",
+    "regex": "The %field% format is invalid",
+    "required": "The %field% field is required",
+    "same": "The %field% and %other% must match",
+    "size": {
+        "array": "The %field% must contain %size% items",
+        "number": "The %field% must be %size%",
+        "string": "The %field% must be %size% characters"
+    },
+    "starts": {
+        "with": "The %field% must start with one of the following: %values%",
+        "without": "The %field% must not start with one of the following: %values%"
+    },
+    "string": "The %field% must be a string",
+    "timezone": "The %field% must be a valid time zone",
+    "url": "The %field% is not a valid URL"
+}

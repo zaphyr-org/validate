@@ -1,0 +1,5 @@
+{
+  "min": {
+    "string": "%Field% muss mindestens %min% Zeichen lang sein"
+  }
+}

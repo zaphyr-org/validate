@@ -1,0 +1,67 @@
+{
+    "active": {
+        "url": "%Field% ist keine gültige URL"
+    },
+    "alpha": {
+        "chars": "%Field% darf nur Buchstaben enthalten",
+        "dash": "%Field% darf nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten",
+        "num": "%Field% darf nur Buchstaben und Zahlen enthalten"
+    },
+    "array": "%Field% muss ein Array sein",
+    "ascii": "%Field% darf nur ASCII-Buchstaben enthalten",
+    "between": {
+        "array": "%Field% muss zwischen %min% und %max% Einträge haben",
+        "number": "%Field% muss zwischen %min% und %max% liegen",
+        "string": "%Field% muss zwischen %min% und %max% Zeichen haben"
+    },
+    "bool": "%Field% muss wahr oder falsch sein",
+    "checked": "%Field% muss akzeptiert werden",
+    "date": {
+        "after": "%Field% muss ein Datum nach dem %date% sein",
+        "before": "%Field% muss ein Datum vor dem %date% sein",
+        "equals": "%Field% muss dem Datum %date% entsprechen",
+        "format": "%Field% muss mit dem Datums-Format %format% übereinstimmen",
+        "time": "%Field% ist kein gültiges Datum"
+    },
+    "different": "%Field% und %other% müssen unterschiedliche Werte haben",
+    "digits": "%Field% muss aus %digits% Ziffern bestehen",
+    "email": "%Field% muss eine gültige E-Mail Adresse sein",
+    "ends": {
+        "with": "%Field% muss mit einer der folgenden Angaben enden: %values%",
+        "without": "%Field% darf nicht mit einer der folgenden Angaben enden: %values%"
+    },
+    "integer": "%Field% muss eine ganze Zahl sein",
+    "ip": "%Field% muss eine gültige IP-Adresse sein",
+    "ipv4": "%Field% muss eine gültige IPv4-Adresse sein",
+    "ipv6": "%Field% muss eine gültige IPv6-Adresse sein",
+    "json": "%Field% muss eine gültige JSON-Zeichenkette sein",
+    "max": {
+        "array": "%Field% darf nicht mehr als %max% Einträge haben",
+        "number": "%Field% darf nicht größer als %max% sein",
+        "string": "%Field% darf nicht länger als %max% Zeichen sein"
+    },
+    "min": {
+        "array": "%Field% muss mindestens %min% Einträge haben",
+        "number": "%Field% muss mindestens %min% sein",
+        "string": "%Field% muss mindestens %min% Zeichen lang sein"
+    },
+    "not": {
+        "regex": "%Field% Format ist ungültig"
+    },
+    "number": "%Field% darf nur aus Nummern bestehen",
+    "regex": "%Field% Format ist ungültig",
+    "required": "%Field% ist ein Pflichtfeld",
+    "same": "%Field% und %other% müssen gleich sein",
+    "size": {
+        "array": "%Field% muss %size% Einträge enthalten",
+        "number": "%Field% muss %size% sein",
+        "string": "%Field% muss aus %size% Zeichen bestehen"
+    },
+    "starts": {
+        "with": "%Field% muss mit einer der folgenden Angaben beginnen: %values%",
+        "without": "%Field% darf nicht mit einer der folgenden Angaben beginnen: %values%"
+    },
+    "string": "%Field% muss eine Zeichenkette sein",
+    "timezone": "%Field% muss eine gültige Zeitzone sein",
+    "url": "%Field% ist keine gültige URL"
+}
