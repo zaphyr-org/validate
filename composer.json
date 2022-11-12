@@ -20,7 +20,6 @@
     "ext-json": "*",
     "ext-simplexml": "*",
     "egulias/email-validator": "^3.2",
-    "psr/container": "^1.0",
     "symfony/yaml": "^5.3",
     "zaphyr-org/translate": "^1.0",
     "zaphyr-org/utils": "^1.0"
