@@ -12,7 +12,7 @@ class BoolRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool
     {
         return in_array($value, [true, false, 0, 1, '0', '1'], true);
     }

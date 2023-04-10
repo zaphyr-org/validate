@@ -15,7 +15,7 @@ class TimezoneRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool
     {
         try {
             new DateTimeZone($value);

@@ -12,7 +12,7 @@ class JsonRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool
     {
         if (!$value || !is_scalar($value) && !method_exists($value, '__toString')) {
             return false;

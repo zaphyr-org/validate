@@ -20,7 +20,7 @@ class EmailRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool
     {
         if (!is_string($value) && !(is_object($value) && method_exists($value, '__toString'))) {
             return false;

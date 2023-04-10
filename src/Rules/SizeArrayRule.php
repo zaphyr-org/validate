@@ -12,7 +12,7 @@ class SizeArrayRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool
     {
         $this->countRequiredParams(1, $parameters, 'size_array');
 
