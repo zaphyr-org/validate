@@ -7,11 +7,11 @@ namespace Zaphyr\Validate\Rules;
 use DateTime;
 use DateTimeInterface;
 use Exception;
-use InvalidArgumentException;
 use ReflectionClass;
 use Zaphyr\Utils\Arr;
 use Zaphyr\Utils\Str;
 use Zaphyr\Validate\Contracts\RuleInterface;
+use Zaphyr\Validate\Exceptions\ValidatorException;
 
 /**
  * @author merloxx <merloxx@zaphyr.org>
@@ -42,12 +42,12 @@ abstract class AbstractRule implements RuleInterface
      * @param array<int, mixed> $parameters
      * @param string            $rule
      *
-     * @throws InvalidArgumentException
+     * @throws ValidatorException
      */
     protected function countRequiredParams(int $count, array $parameters, string $rule): void
     {
         if (count($parameters) < $count) {
-            throw new InvalidArgumentException(
+            throw new ValidatorException(
                 'The validation rule "' . $rule . '" requires at least ' .
                 $count . ' parameter' . ($count > 1 ? 's' : null)
             );
@@ -95,7 +95,7 @@ abstract class AbstractRule implements RuleInterface
             '<=' => $first <= $second,
             '>=' => $first >= $second,
             '=' => $first === $second,
-            default => throw new InvalidArgumentException('The "' . $operator . '" is not a valid operator'),
+            default => throw new ValidatorException('The "' . $operator . '" is not a valid operator'),
         };
     }
 }

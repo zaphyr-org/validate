@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Zaphyr\Validate;
 
 use Closure;
-use InvalidArgumentException;
 use Zaphyr\Utils\Str;
 use Zaphyr\Validate\Contracts\RuleInterface;
 use Zaphyr\Validate\Contracts\ValidatorInterface;
+use Zaphyr\Validate\Exceptions\ValidatorException;
 
 /**
  * @author merloxx <merloxx@zaphyr.org>
@@ -92,6 +92,7 @@ class Validator implements ValidatorInterface
      * @param mixed                $value
      * @param string               $rule
      *
+     * @throws ValidatorException
      * @return void
      */
     protected function validateInput(array $inputs, string $field, mixed $value, string $rule): void
@@ -118,6 +119,7 @@ class Validator implements ValidatorInterface
     /**
      * @param string $ruleName
      *
+     * @throws ValidatorException
      * @return RuleInterface
      */
     protected function getRule(string $ruleName): RuleInterface
@@ -129,7 +131,7 @@ class Validator implements ValidatorInterface
         $class = 'Zaphyr\\Validate\\Rules\\' . Str::studly(trim($ruleName)) . 'Rule';
 
         if (!class_exists($class)) {
-            throw new InvalidArgumentException('Invalid rule name "' . $ruleName . '"');
+            throw new ValidatorException('Invalid rule name "' . $ruleName . '"');
         }
 
         /** @var RuleInterface $class */
@@ -172,7 +174,7 @@ class Validator implements ValidatorInterface
     public function addRule(string $name, RuleInterface $rule): static
     {
         if ($this->hasRule($name)) {
-            throw new InvalidArgumentException('A rule with the name "' . $name . '" is already in use');
+            throw new ValidatorException('A rule with the name "' . $name . '" is already in use');
         }
 
         $this->cachedRules[$name] = $rule;

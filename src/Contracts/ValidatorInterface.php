@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Zaphyr\Validate\Contracts;
 
 use Closure;
+use Zaphyr\Validate\Exceptions\ValidatorException;
 use Zaphyr\Validate\MessageBag;
 
 /**
@@ -18,6 +19,7 @@ interface ValidatorInterface
      * @param array<string, string> $customMessages
      * @param array<string, mixed>  $customFieldReplacers
      *
+     * @throws ValidatorException If validation rule is not available
      * @return void
      */
     public function validate(
@@ -41,6 +43,7 @@ interface ValidatorInterface
      * @param string        $name
      * @param RuleInterface $rule
      *
+     * @throws ValidatorException If validation rule already exists
      * @return $this
      */
     public function addRule(string $name, RuleInterface $rule): static;

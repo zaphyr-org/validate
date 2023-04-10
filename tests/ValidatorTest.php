@@ -7,9 +7,9 @@ namespace Zaphyr\ValidateTests;
 use Countable;
 use DateTime;
 use DateTimeImmutable;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Zaphyr\Validate\Exceptions\ValidatorException;
 use Zaphyr\Validate\Rules\RequiredRule;
 use Zaphyr\Validate\Validator;
 use Zaphyr\ValidateTests\TestAssets\Rules\Banana;
@@ -252,7 +252,7 @@ class ValidatorTest extends TestCase
 
     public function testAddRuleThrowsExceptionWhenRuleAlreadyInUse(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator
             ->addRule('banana', new Banana())
@@ -688,7 +688,7 @@ class ValidatorTest extends TestCase
 
     public function testBetweenArrayThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['items' => [1]], ['items' => 'between_array']);
     }
@@ -719,7 +719,7 @@ class ValidatorTest extends TestCase
 
     public function testBetweenNumberThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['number' => 4], ['number' => 'between_number']);
     }
@@ -750,7 +750,7 @@ class ValidatorTest extends TestCase
 
     public function testBetweenStringThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'between_string']);
     }
@@ -902,7 +902,7 @@ class ValidatorTest extends TestCase
 
     public function testDateAfterThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['date' => '2023-09-12'], ['date' => 'date_after']);
     }
@@ -958,7 +958,7 @@ class ValidatorTest extends TestCase
 
     public function testDateBeforeThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['date' => '2023-09-12'], ['date' => 'date_before']);
     }
@@ -1011,7 +1011,7 @@ class ValidatorTest extends TestCase
 
     public function testDateEqualsThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['date' => '2023-09-12'], ['date' => 'date_equals']);
     }
@@ -1126,7 +1126,7 @@ class ValidatorTest extends TestCase
 
     public function testDateFormatThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['date' => '2022-09-13'], ['date' => 'date_format']);
     }
@@ -1230,7 +1230,7 @@ class ValidatorTest extends TestCase
 
     public function testDifferentThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['answer1' => 'foo'], ['answer1' => 'different']);
     }
@@ -1258,7 +1258,7 @@ class ValidatorTest extends TestCase
 
     public function testDigitsThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['pin' => '1234'], ['pin' => 'digits']);
     }
@@ -1398,7 +1398,7 @@ class ValidatorTest extends TestCase
 
     public function testEndsWithThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'ends_with']);
     }
@@ -1429,7 +1429,7 @@ class ValidatorTest extends TestCase
 
     public function testEndsWithoutThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'ends_without']);
     }
@@ -1588,7 +1588,7 @@ class ValidatorTest extends TestCase
 
     public function testMaxArrayThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['names' => ['merloxx', 'john']], ['names' => 'max_array']);
     }
@@ -1613,7 +1613,7 @@ class ValidatorTest extends TestCase
 
     public function testMaxNumberThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['number' => 4], ['number' => 'max_number']);
     }
@@ -1638,7 +1638,7 @@ class ValidatorTest extends TestCase
 
     public function testMaxStringThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'max_string']);
     }
@@ -1672,7 +1672,7 @@ class ValidatorTest extends TestCase
 
     public function testMinArrayThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['names' => ['merloxx', 'john']], ['names' => 'min_array']);
     }
@@ -1697,7 +1697,7 @@ class ValidatorTest extends TestCase
 
     public function testMinNumberThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['number' => 4], ['number' => 'min_number']);
     }
@@ -1722,7 +1722,7 @@ class ValidatorTest extends TestCase
 
     public function testMinStringThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'min_string']);
     }
@@ -1756,7 +1756,7 @@ class ValidatorTest extends TestCase
 
     public function testNotRegexThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'not_regex']);
     }
@@ -1823,7 +1823,7 @@ class ValidatorTest extends TestCase
 
     public function testRegexThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'regex']);
     }
@@ -1872,7 +1872,7 @@ class ValidatorTest extends TestCase
 
     public function testSameThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['password_confirm' => 'secret'], ['password_confirm' => 'same']);
     }
@@ -1903,7 +1903,7 @@ class ValidatorTest extends TestCase
 
     public function testSizeArrayThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['names' => ['merloxx', 'john']], ['names' => 'size_array']);
     }
@@ -1928,7 +1928,7 @@ class ValidatorTest extends TestCase
 
     public function testSizeNumberThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['number' => 4], ['number' => 'size_number']);
     }
@@ -1953,7 +1953,7 @@ class ValidatorTest extends TestCase
 
     public function testSizeStringThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'size_string']);
     }
@@ -1984,7 +1984,7 @@ class ValidatorTest extends TestCase
 
     public function testStartWithThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'starts_with']);
     }
@@ -2015,7 +2015,7 @@ class ValidatorTest extends TestCase
 
     public function testStartsWithoutThrowsExceptionOnInvalidRequiredParameterCount(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'merloxx'], ['name' => 'starts_without']);
     }
@@ -2368,5 +2368,12 @@ class ValidatorTest extends TestCase
             ['foo://bar'],
             ['javascript://test%0Alert(321)'],
         ];
+    }
+
+    public function testValidatorThrowsExceptionOnInvalidRuleName(): void
+    {
+        $this->expectException(ValidatorException::class);
+
+        $this->validator->validate(['name' => 'John Doe'], ['name' => 'invalidRule']);
     }
 }
