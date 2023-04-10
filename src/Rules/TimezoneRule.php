@@ -19,7 +19,7 @@ class TimezoneRule extends AbstractRule
     {
         try {
             new DateTimeZone($value);
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return false;
         }
 

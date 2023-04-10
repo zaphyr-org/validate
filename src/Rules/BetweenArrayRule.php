@@ -12,7 +12,7 @@ class BetweenArrayRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool
     {
         $this->countRequiredParams(2, $parameters, 'between_array');
 
@@ -22,7 +22,7 @@ class BetweenArrayRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): ?string
+    public function replace(string $message, array $parameters): string|null
     {
         return str_replace(['%min%', '%max%'], [$parameters[0], $parameters[1]], $message);
     }

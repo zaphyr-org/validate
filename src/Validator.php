@@ -18,27 +18,27 @@ class Validator implements ValidatorInterface
     /**
      * @var RuleParser
      */
-    protected $ruleParser;
+    protected RuleParser $ruleParser;
 
     /**
      * @var MessageBag
      */
-    protected $messageBag;
+    protected MessageBag $messageBag;
 
     /**
      * @var RuleInterface[]
      */
-    protected $cachedRules = [];
+    protected array $cachedRules = [];
 
     /**
      * @var Closure[]
      */
-    protected $beforeValidationHooks = [];
+    protected array $beforeValidationHooks = [];
 
     /**
      * @var Closure[]
      */
-    protected $afterValidationHooks = [];
+    protected array $afterValidationHooks = [];
 
     /**
      * @param string|null $locale
@@ -46,9 +46,9 @@ class Validator implements ValidatorInterface
      * @param string|null $translationMassagesNamespace
      */
     public function __construct(
-        string $locale = null,
-        string $translationMassagesDirectory = null,
-        string $translationMassagesNamespace = null
+        string|null $locale = null,
+        string|null $translationMassagesDirectory = null,
+        string|null $translationMassagesNamespace = null
     ) {
         $this->ruleParser = new RuleParser();
         $this->messageBag = new MessageBag($locale, $translationMassagesDirectory, $translationMassagesNamespace);
@@ -94,7 +94,7 @@ class Validator implements ValidatorInterface
      *
      * @return void
      */
-    protected function validateInput(array $inputs, string $field, $value, string $rule): void
+    protected function validateInput(array $inputs, string $field, mixed $value, string $rule): void
     {
         $ruleName = $this->ruleParser->getRuleName($rule);
         $ruleParameters = $this->ruleParser->getRuleParameters($rule);
@@ -110,7 +110,7 @@ class Validator implements ValidatorInterface
      *
      * @return bool|null
      */
-    protected function shouldStopValidating(string $field): ?bool
+    protected function shouldStopValidating(string $field): bool|null
     {
         return $this->hasRule('bail') ? $this->messageBag->has($field) : null;
     }
@@ -169,7 +169,7 @@ class Validator implements ValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function addRule(string $name, RuleInterface $rule): ValidatorInterface
+    public function addRule(string $name, RuleInterface $rule): static
     {
         if ($this->hasRule($name)) {
             throw new InvalidArgumentException('A rule with the name "' . $name . '" is already in use');
@@ -183,7 +183,7 @@ class Validator implements ValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function addBeforeValidationHook(Closure $closure): ValidatorInterface
+    public function addBeforeValidationHook(Closure $closure): static
     {
         $this->beforeValidationHooks[] = $closure;
 
@@ -193,7 +193,7 @@ class Validator implements ValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function addAfterValidationHook(Closure $closure): ValidatorInterface
+    public function addAfterValidationHook(Closure $closure): static
     {
         $this->afterValidationHooks[] = $closure;
 

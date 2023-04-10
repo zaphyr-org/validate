@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Zaphyr\Validate\Traits;
 
+use Zaphyr\Translate\Enum\Reader;
 use Zaphyr\Translate\Translator;
 
 /**
@@ -14,17 +15,17 @@ trait TranslationTrait
     /**
      * @var Translator
      */
-    protected $translator;
+    protected Translator $translator;
 
     /**
      * @var string
      */
-    protected $namespace;
+    protected string $namespace;
 
     /**
      * @var string
      */
-    private $internalNamespace = 'validation';
+    private string $internalNamespace = 'validation';
 
     /**
      * @param string|null $locale
@@ -34,9 +35,9 @@ trait TranslationTrait
      * @return void
      */
     protected function initTranslatorInstance(
-        string $locale = null,
-        string $directory = null,
-        string $namespace = null
+        string|null $locale = null,
+        string|null $directory = null,
+        string|null $namespace = null
     ): void {
         $directories = [dirname(__DIR__, 2) . '/resources/translations'];
 
@@ -45,7 +46,7 @@ trait TranslationTrait
         }
 
         $this->namespace = $namespace ?? $this->internalNamespace;
-        $this->translator = new Translator($directories, $locale ?? 'en', 'en', Translator::READER_JSON);
+        $this->translator = new Translator($directories, $locale ?? 'en', 'en', Reader::JSON);
     }
 
     /**
@@ -53,7 +54,7 @@ trait TranslationTrait
      *
      * @return string|null
      */
-    protected function getTranslation(string $id): ?string
+    protected function getTranslation(string $id): string|null
     {
         $customId = "$this->namespace.$id";
 

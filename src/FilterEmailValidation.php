@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Zaphyr\Validate;
 
 use Egulias\EmailValidator\EmailLexer;
-use Egulias\EmailValidator\Validation\EmailValidation;
 use Egulias\EmailValidator\Result\InvalidEmail;
+use Egulias\EmailValidator\Validation\EmailValidation;
 
 /**
  * @author merloxx <merloxx@zaphyr.org>
@@ -14,16 +14,10 @@ use Egulias\EmailValidator\Result\InvalidEmail;
 final class FilterEmailValidation implements EmailValidation
 {
     /**
-     * @var int|null
-     */
-    protected $flags;
-
-    /**
      * @param int|null $flags
      */
-    public function __construct(?int $flags = null)
+    public function __construct(protected int|null $flags = null)
     {
-        $this->flags = $flags;
     }
 
     /**
@@ -47,7 +41,7 @@ final class FilterEmailValidation implements EmailValidation
     /**
      * {@inheritdoc}
      */
-    public function getError(): ?InvalidEmail
+    public function getError(): InvalidEmail|null
     {
         return null;
     }

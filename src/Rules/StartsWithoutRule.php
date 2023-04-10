@@ -24,7 +24,7 @@ class StartsWithoutRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): ?string
+    public function replace(string $message, array $parameters): string|null
     {
         return str_replace('%values%', implode(', ', $parameters), $message);
     }

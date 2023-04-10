@@ -32,7 +32,7 @@ abstract class AbstractRule implements RuleInterface
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): ?string
+    public function replace(string $message, array $parameters): string|null
     {
         return null;
     }
@@ -62,7 +62,7 @@ abstract class AbstractRule implements RuleInterface
      *
      * @return bool
      */
-    protected function compareDates($value, array $parameters, array $inputs, string $operator): bool
+    protected function compareDates(mixed $value, array $parameters, array $inputs, string $operator): bool
     {
         if (!is_string($value) && !is_numeric($value) && !$value instanceof DateTimeInterface) {
             return false;
@@ -87,21 +87,15 @@ abstract class AbstractRule implements RuleInterface
      *
      * @return bool
      */
-    protected function compare($first, $second, string $operator): bool
+    protected function compare(mixed $first, mixed $second, string $operator): bool
     {
-        switch ($operator) {
-            case '<':
-                return $first < $second;
-            case '>':
-                return $first > $second;
-            case '<=':
-                return $first <= $second;
-            case '>=':
-                return $first >= $second;
-            case '=':
-                return $first === $second;
-            default:
-                throw new InvalidArgumentException('The "' . $operator . '" is not a valid operator');
-        }
+        return match ($operator) {
+            '<' => $first < $second,
+            '>' => $first > $second,
+            '<=' => $first <= $second,
+            '>=' => $first >= $second,
+            '=' => $first === $second,
+            default => throw new InvalidArgumentException('The "' . $operator . '" is not a valid operator'),
+        };
     }
 }

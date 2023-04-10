@@ -14,6 +14,6 @@ class CheckedRule extends AbstractRule
      */
     public function validate(string $field, $value, array $parameters, array $inputs): bool
     {
-        return in_array($value, ['yes', 'on', '1', 1, true, 'true'], true);
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN) !== false;
     }
 }

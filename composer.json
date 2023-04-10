@@ -1,61 +1,61 @@
 {
-  "name": "zaphyr-org/validate",
-  "description": "Easy to use, highly customizable validator.",
-  "keywords": [
-    "validation",
-    "validator",
-    "validate"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "merloxx",
-      "email": "merloxx@zaphyr.org",
-      "homepage": "https://merloxx.it",
-      "role": "Developer"
-    }
-  ],
-  "require": {
-    "php": ">=7.2",
-    "ext-json": "*",
-    "ext-simplexml": "*",
-    "egulias/email-validator": "^3.2",
-    "symfony/yaml": "^5.4",
-    "zaphyr-org/translate": "^1.0",
-    "zaphyr-org/utils": "^1.0"
-  },
-  "require-dev": {
-    "phpstan/phpstan": "^1.9",
-    "phpstan/phpstan-phpunit": "^1.2",
-    "phpunit/phpunit": "^9.5",
-    "roave/security-advisories": "dev-latest",
-    "squizlabs/php_codesniffer": "^3.7"
-  },
-  "autoload": {
-    "psr-4": {
-      "Zaphyr\\Validate\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Zaphyr\\ValidateTests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "cs": "phpcs --standard=PSR12 -n src",
-    "cbf": "phpcbf --standard=PSR12 -n src",
-    "unit": "phpunit --colors=always",
-    "phpstan": "vendor/bin/phpstan analyse --memory-limit 512M",
-    "test": [
-      "@unit",
-      "@phpstan",
-      "@cs"
-    ]
-  },
-  "config": {
-    "sort-packages": true,
-    "optimize-autoloader": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "zaphyr-org/validate",
+    "description": "Easy to use, highly customizable validator.",
+    "keywords": [
+        "validation",
+        "validator",
+        "validate"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "merloxx",
+            "email": "merloxx@zaphyr.org",
+            "homepage": "https://merloxx.it",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "egulias/email-validator": "^4.0",
+        "symfony/yaml": "^6.2",
+        "zaphyr-org/translate": "^2.0",
+        "zaphyr-org/utils": "^2.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-phpunit": "^1.2",
+        "phpunit/phpunit": "^10.0",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zaphyr\\Validate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zaphyr\\ValidateTests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs": "vendor/bin/phpcs --standard=PSR12 -n src",
+        "cbf": "vendor/bin/phpcbf --standard=PSR12 -n src",
+        "unit": "vendor/bin/phpunit --colors=always",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit 512M",
+        "test": [
+            "@unit",
+            "@phpstan",
+            "@cs"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

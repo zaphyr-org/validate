@@ -17,12 +17,12 @@ trait MessageTrait
     /**
      * @var array<string, string>
      */
-    protected $customMessages = [];
+    protected array $customMessages = [];
 
     /**
      * @var array<string, string>
      */
-    protected $customFieldReplacers = [];
+    protected array $customFieldReplacers = [];
 
     /**
      * @param array<string, string> $customMessages
@@ -72,7 +72,7 @@ trait MessageTrait
      *
      * @return string|null
      */
-    protected function getCustomMessage(string $field, RuleInterface $rule): ?string
+    protected function getCustomMessage(string $field, RuleInterface $rule): string|null
     {
         // Check for custom inline messages
         $ruleName = $rule->getName();

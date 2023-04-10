@@ -29,7 +29,7 @@ class ActiveUrlRule extends AbstractRule
                 }
 
                 return count($dnsRecord) > 0;
-            } catch (Exception $e) {
+            } catch (Exception) {
                 return false;
             }
         }

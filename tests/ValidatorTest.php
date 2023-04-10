@@ -10,7 +10,6 @@ use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use Zaphyr\Translate\Translator;
 use Zaphyr\Validate\Rules\RequiredRule;
 use Zaphyr\Validate\Validator;
 use Zaphyr\ValidateTests\TestAssets\Rules\Banana;
@@ -2107,7 +2106,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array<string[]>
      */
-    public function validUrlsDataProvider(): array
+    public static function validUrlsDataProvider(): array
     {
         return [
             ['aaa://fully.qualified.domain/path'],
@@ -2351,7 +2350,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array<array<mixed>>
      */
-    public function invalidUrlsDataProvider(): array
+    public static function invalidUrlsDataProvider(): array
     {
         return [
             [null],

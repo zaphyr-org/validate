@@ -18,7 +18,7 @@ class MessageBag
     /**
      * @var array<string, string[]>
      */
-    protected $messages = [];
+    protected array $messages = [];
 
     /**
      * @param string|null $locale
@@ -26,9 +26,9 @@ class MessageBag
      * @param string|null $translationMassagesNamespace
      */
     public function __construct(
-        ?string $locale = null,
-        ?string $translationMassagesDirectory = null,
-        ?string $translationMassagesNamespace = null
+        string|null $locale = null,
+        string|null $translationMassagesDirectory = null,
+        string|null $translationMassagesNamespace = null
     ) {
         $this->initTranslatorInstance($locale, $translationMassagesDirectory, $translationMassagesNamespace);
     }
@@ -54,7 +54,7 @@ class MessageBag
      *
      * @return string|null
      */
-    public function first(?string $field = null): ?string
+    public function first(string|null $field = null): string|null
     {
         $messages = $field === null ? $this->all() : $this->get($field);
         $firstMessage = is_array($messages) ? Arr::first($messages) : null;
@@ -67,7 +67,7 @@ class MessageBag
      *
      * @return string[]|null
      */
-    public function get(?string $field = null): ?array
+    public function get(string|null $field = null): array|null
     {
         if ($field !== null && $this->has($field)) {
             return $this->messages[$field];

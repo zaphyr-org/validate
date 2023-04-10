@@ -22,7 +22,7 @@ interface RuleInterface
      *
      * @return bool
      */
-    public function validate(string $field, $value, array $parameters, array $inputs): bool;
+    public function validate(string $field, mixed $value, array $parameters, array $inputs): bool;
 
     /**
      * @param string            $message
@@ -30,5 +30,5 @@ interface RuleInterface
      *
      * @return string|null
      */
-    public function replace(string $message, array $parameters): ?string;
+    public function replace(string $message, array $parameters): string|null;
 }

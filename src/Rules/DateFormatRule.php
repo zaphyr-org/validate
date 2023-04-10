@@ -31,7 +31,7 @@ class DateFormatRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): ?string
+    public function replace(string $message, array $parameters): string|null
     {
         return str_replace('%format%', $parameters[0], $message);
     }

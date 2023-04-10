@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Zaphyr\Validate\Rules;
 
+use Zaphyr\Utils\Str;
+
 /**
  * @author merloxx <merloxx@zaphyr.org>
  */
@@ -14,14 +16,6 @@ class AsciiRule extends AbstractRule
      */
     public function validate(string $field, $value, array $parameters, array $inputs): bool
     {
-        if (!is_string($value)) {
-            return false;
-        }
-
-        if (function_exists('mb_detect_encoding')) {
-            return mb_detect_encoding($value, 'ASCII', true) === 'ASCII';
-        }
-
-        return preg_match('/[^\x00-\x7F]/', $value) === 0;
+        return is_string($value) && Str::isAscii($value);
     }
 }

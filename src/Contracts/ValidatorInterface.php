@@ -43,19 +43,19 @@ interface ValidatorInterface
      *
      * @return $this
      */
-    public function addRule(string $name, RuleInterface $rule): self;
+    public function addRule(string $name, RuleInterface $rule): static;
 
     /**
      * @param Closure $closure
      *
      * @return $this
      */
-    public function addBeforeValidationHook(Closure $closure): self;
+    public function addBeforeValidationHook(Closure $closure): static;
 
     /**
      * @param Closure $closure
      *
      * @return $this
      */
-    public function addAfterValidationHook(Closure $closure): self;
+    public function addAfterValidationHook(Closure $closure): static;
 }
