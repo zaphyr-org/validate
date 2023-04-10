@@ -1563,6 +1563,23 @@ class ValidatorTest extends TestCase
     }
 
     /* -------------------------------------------------
+     * MAC
+     * -------------------------------------------------
+     */
+
+    public function testMac(): void
+    {
+        $this->validator->validate(['mac' => '00:00:00:00:00:00'], ['mac' => 'mac']);
+        self::assertTrue($this->validator->isValid());
+
+        $this->validator->validate(['mac' => '00-00-00-00-00-00'], ['mac' => 'mac']);
+        self::assertTrue($this->validator->isValid());
+
+        $this->validator->validate(['mac' => ''], ['mac' => 'mac']);
+        self::assertFalse($this->validator->isValid());
+    }
+
+    /* -------------------------------------------------
      * MAX ARRAY
      * -------------------------------------------------
      */
