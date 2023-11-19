@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zaphyr\ValidateTests;
+namespace Zaphyr\ValidateTests\Unit;
 
 use Countable;
 use DateTime;
@@ -21,12 +21,12 @@ class ValidatorTest extends TestCase
      */
     protected $validator;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->validator = new Validator('en', __DIR__ . '/TestAssets/translations');
+        $this->validator = new Validator('en', dirname(__DIR__) . '/TestAssets/translations');
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->validator);
     }
@@ -413,7 +413,7 @@ class ValidatorTest extends TestCase
 
     public function testOverwriteExistingWithCustomMessagesFile(): void
     {
-        $validator = new Validator('de', __DIR__ . '/TestAssets/translations');
+        $validator = new Validator('de', dirname(__DIR__) . '/TestAssets/translations');
 
         $inputs = [
             'name' => '',
