@@ -22,7 +22,7 @@ class DateAfterRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): string|null
+    public function replace(string $message, array $parameters): ?string
     {
         return str_replace('%date%', $parameters[0], $message);
     }

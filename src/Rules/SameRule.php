@@ -26,7 +26,7 @@ class SameRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): string|null
+    public function replace(string $message, array $parameters): ?string
     {
         return str_replace('%other%', $parameters[0], $message);
     }

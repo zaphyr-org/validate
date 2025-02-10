@@ -32,7 +32,7 @@ abstract class AbstractRule implements RuleInterface
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): string|null
+    public function replace(string $message, array $parameters): ?string
     {
         return null;
     }
@@ -73,7 +73,7 @@ abstract class AbstractRule implements RuleInterface
         try {
             $beforeDate = $value instanceof DateTimeInterface ? $value : new DateTime((string)$value);
             $afterDate = new DateTime($date);
-        } catch (Exception $e) {
+        } catch (Exception) {
             return false;
         }
 

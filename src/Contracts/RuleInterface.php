@@ -30,5 +30,5 @@ interface RuleInterface
      *
      * @return string|null
      */
-    public function replace(string $message, array $parameters): string|null;
+    public function replace(string $message, array $parameters): ?string;
 }

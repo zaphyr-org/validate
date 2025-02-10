@@ -72,7 +72,7 @@ trait MessageTrait
      *
      * @return string|null
      */
-    protected function getCustomMessage(string $field, RuleInterface $rule): string|null
+    protected function getCustomMessage(string $field, RuleInterface $rule): ?string
     {
         // Check for custom inline messages
         $ruleName = $rule->getName();

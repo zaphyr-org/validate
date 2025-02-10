@@ -16,7 +16,7 @@ final class FilterEmailValidation implements EmailValidation
     /**
      * @param int|null $flags
      */
-    public function __construct(protected int|null $flags = null)
+    public function __construct(protected ?int $flags = null)
     {
     }
 
@@ -41,7 +41,7 @@ final class FilterEmailValidation implements EmailValidation
     /**
      * {@inheritdoc}
      */
-    public function getError(): InvalidEmail|null
+    public function getError(): ?InvalidEmail
     {
         return null;
     }

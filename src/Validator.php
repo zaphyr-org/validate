@@ -46,9 +46,9 @@ class Validator implements ValidatorInterface
      * @param string|null $translationMassagesNamespace
      */
     public function __construct(
-        string|null $locale = null,
-        string|null $translationMassagesDirectory = null,
-        string|null $translationMassagesNamespace = null
+        ?string $locale = null,
+        ?string $translationMassagesDirectory = null,
+        ?string $translationMassagesNamespace = null
     ) {
         $this->ruleParser = new RuleParser();
         $this->messageBag = new MessageBag($locale, $translationMassagesDirectory, $translationMassagesNamespace);
@@ -111,7 +111,7 @@ class Validator implements ValidatorInterface
      *
      * @return bool|null
      */
-    protected function shouldStopValidating(string $field): bool|null
+    protected function shouldStopValidating(string $field): ?bool
     {
         return $this->hasRule('bail') ? $this->messageBag->has($field) : null;
     }

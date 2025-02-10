@@ -22,7 +22,7 @@ class BetweenNumberRule extends AbstractRule
     /**
      * {@inheritdoc}
      */
-    public function replace(string $message, array $parameters): string|null
+    public function replace(string $message, array $parameters): ?string
     {
         return str_replace(['%min%', '%max%'], [$parameters[0], $parameters[1]], $message);
     }

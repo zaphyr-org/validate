@@ -35,9 +35,9 @@ trait TranslationTrait
      * @return void
      */
     protected function initTranslatorInstance(
-        string|null $locale = null,
-        string|null $directory = null,
-        string|null $namespace = null
+        ?string $locale = null,
+        ?string $directory = null,
+        ?string $namespace = null
     ): void {
         $directories = [dirname(__DIR__, 2) . '/resources/translations'];
 
@@ -54,7 +54,7 @@ trait TranslationTrait
      *
      * @return string|null
      */
-    protected function getTranslation(string $id): string|null
+    protected function getTranslation(string $id): ?string
     {
         $customId = "$this->namespace.$id";
 
