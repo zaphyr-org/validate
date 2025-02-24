@@ -42,16 +42,16 @@ class Validator implements ValidatorInterface
 
     /**
      * @param string|null $locale
-     * @param string|null $translationMassagesDirectory
-     * @param string|null $translationMassagesNamespace
+     * @param string|null $translationMessagesDirectory
+     * @param string|null $translationMessagesNamespace
      */
     public function __construct(
         ?string $locale = null,
-        ?string $translationMassagesDirectory = null,
-        ?string $translationMassagesNamespace = null
+        ?string $translationMessagesDirectory = null,
+        ?string $translationMessagesNamespace = null
     ) {
         $this->ruleParser = new RuleParser();
-        $this->messageBag = new MessageBag($locale, $translationMassagesDirectory, $translationMassagesNamespace);
+        $this->messageBag = new MessageBag($locale, $translationMessagesDirectory, $translationMessagesNamespace);
     }
 
     /**
