@@ -38,11 +38,11 @@ If you discover security related issues, please email security@zaphyr.org **inst
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://zaphyr.org/contributions) for details.
+Please see [CONTRIBUTING](https://zaphyr.org/docs/contributing) for details.
 
 ## Code of Conduct
 
-Please see [CODE OF CONDUCT](https://zaphyr.org/contributions#code-of-conduct) for details.
+Please see [CODE OF CONDUCT](https://zaphyr.org/docs/code-of-conduct) for details.
 
 ## License
 
