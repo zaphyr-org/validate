@@ -134,8 +134,10 @@ class Validator implements ValidatorInterface
             throw new ValidatorException('Invalid rule name "' . $ruleName . '"');
         }
 
-        /** @var RuleInterface $class */
-        return $this->cachedRules[$ruleName] = new $class();
+        /** @var RuleInterface $ruleObject */
+        $ruleObject = new $class();
+
+        return $this->cachedRules[$ruleName] = $ruleObject;
     }
 
     /**

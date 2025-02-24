@@ -25,11 +25,6 @@ class DateTimeRule extends AbstractRule
         }
 
         $date = date_parse((string)$value);
-
-        if (!is_array($date)) {
-            return false;
-        }
-
         $month = $date['month'] ?: 0;
         $day = $date['day'] ?: 0;
         $year = $date['year'] ?: 0;
