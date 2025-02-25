@@ -42,7 +42,7 @@ abstract class AbstractRule implements RuleInterface
      * @param array<int, mixed> $parameters
      * @param string            $rule
      *
-     * @throws ValidatorException
+     * @throws ValidatorException If the number of parameters is invalid
      */
     protected function countRequiredParams(int $count, array $parameters, string $rule): void
     {
@@ -60,6 +60,7 @@ abstract class AbstractRule implements RuleInterface
      * @param array<string, mixed> $inputs
      * @param string               $operator
      *
+     * @throws ValidatorException If operator is not valid
      * @return bool
      */
     protected function compareDates(mixed $value, array $parameters, array $inputs, string $operator): bool
@@ -85,6 +86,7 @@ abstract class AbstractRule implements RuleInterface
      * @param mixed  $second
      * @param string $operator
      *
+     * @throws ValidatorException If operator is not valid
      * @return bool
      */
     protected function compare(mixed $first, mixed $second, string $operator): bool

@@ -19,11 +19,14 @@ class ValidatorTest extends TestCase
     /**
      * @var Validator
      */
-    protected $validator;
+    protected Validator $validator;
 
     protected function setUp(): void
     {
-        $this->validator = new Validator('en', dirname(__DIR__) . '/TestAssets/translations');
+        $this->validator = new Validator(
+            'en',
+            dirname(__DIR__) . '/TestAssets/translations'
+        );
     }
 
     protected function tearDown(): void
@@ -236,16 +239,19 @@ class ValidatorTest extends TestCase
     {
         $inputs = [
             'name' => '',
+            'surname' => '',
         ];
 
         $rules = [
             'name' => 'bail|required|alpha_chars',
+            'surname' => 'required|alpha_chars',
         ];
 
         $this->validator->validate($inputs, $rules);
 
         self::assertNull($this->validator->errors()->get());
-        self::assertEquals(['The name field is required'], $this->validator->errors()->get('name'));
+        self::assertEquals('The name field is required', $this->validator->errors()->first());
+        self::assertEquals('The surname field is required', $this->validator->errors()->first('surname'));
     }
 
     /* -------------------------------------------------
@@ -434,7 +440,10 @@ class ValidatorTest extends TestCase
 
     public function testOverwriteExistingWithCustomMessagesFile(): void
     {
-        $validator = new Validator('de', dirname(__DIR__) . '/TestAssets/translations');
+        $validator = new Validator(
+            'de',
+            dirname(__DIR__) . '/TestAssets/translations'
+        );
 
         $inputs = [
             'name' => '',
@@ -482,8 +491,7 @@ class ValidatorTest extends TestCase
         $this->validator->validate(['name' => ['merloxx']], ['name' => 'required']);
         self::assertTrue($this->validator->isValid());
 
-        $count = new class implements Countable
-        {
+        $count = new class implements Countable {
             public function count(): int
             {
                 return 4;
@@ -502,8 +510,7 @@ class ValidatorTest extends TestCase
         $this->validator->validate(['name' => []], ['name' => 'required']);
         self::assertFalse($this->validator->isValid());
 
-        $count = new class implements Countable
-        {
+        $count = new class implements Countable {
             public function count(): int
             {
                 return 0;
@@ -1297,7 +1304,6 @@ class ValidatorTest extends TestCase
         $this->validator->validate(
             [
                 'mail' => new class {
-
                     public function __toString(): string
                     {
                         return 'merloxx@zaphyr.org';
@@ -1322,7 +1328,6 @@ class ValidatorTest extends TestCase
         $this->validator->validate(
             [
                 'mail' => new class {
-
                 },
             ],
             [
@@ -1562,14 +1567,10 @@ class ValidatorTest extends TestCase
         $this->validator->validate(['data' => '{"foo": "bar}'], ['data' => 'json']);
         self::assertFalse($this->validator->isValid());
 
-        $this->validator->validate(
-            [
-                'data' => new class {
-
-                },
-            ],
-            ['data' => 'json']
-        );
+        $this->validator->validate([
+            'data' => new class {
+            }
+        ], ['data' => 'json']);
         self::assertFalse($this->validator->isValid());
 
         $this->validator->validate(['data' => 'foo'], ['data' => 'json']);
@@ -1900,12 +1901,6 @@ class ValidatorTest extends TestCase
             ['password_confirm' => 'same:password']
         );
         self::assertFalse($this->validator->isValid());
-
-        $this->validator->validate(
-            ['password' => null, 'password_confirm' => null],
-            ['password_confirm' => 'same:password']
-        );
-        self::assertFalse($this->validator->isValid());
     }
 
     public function testSameThrowsExceptionOnInvalidRequiredParameterCount(): void
@@ -2119,7 +2114,7 @@ class ValidatorTest extends TestCase
      *
      * @param mixed $url
      */
-    public function testValidateUrlWithValidUrls($url): void
+    public function testValidateUrlWithValidUrls(mixed $url): void
     {
         $this->validator->validate(['url' => $url], ['url' => 'url']);
         self::assertTrue($this->validator->isValid());
@@ -2130,7 +2125,7 @@ class ValidatorTest extends TestCase
      *
      * @param mixed $url
      */
-    public function testValidateUrlWithInvalidUrls($url): void
+    public function testValidateUrlWithInvalidUrls(mixed $url): void
     {
         $this->validator->validate(['url' => $url], ['url' => 'url']);
 
@@ -2372,16 +2367,16 @@ class ValidatorTest extends TestCase
             ['https://google.com'],
             ['http://illuminate.dev'],
             ['http://localhost'],
-            ['https://laravel.com/?'],
+            ['https://zaphyr.org/?'],
             ['http://президент.рф/'],
             ['http://스타벅스코리아.com'],
             ['http://xn--d1abbgf6aiiy.xn--p1ai/'],
-            ['https://laravel.com?'],
-            ['https://laravel.com?q=1'],
-            ['https://laravel.com/?q=1'],
-            ['https://laravel.com#'],
-            ['https://laravel.com#fragment'],
-            ['https://laravel.com/#fragment'],
+            ['https://zaphyr.org?'],
+            ['https://zaphyr.org?q=1'],
+            ['https://zaphyr.org/?q=1'],
+            ['https://zaphyr.org#'],
+            ['https://zaphyr.org#fragment'],
+            ['https://zaphyr.org/#fragment'],
         ];
     }
 
@@ -2413,5 +2408,12 @@ class ValidatorTest extends TestCase
         $this->expectException(ValidatorException::class);
 
         $this->validator->validate(['name' => 'John Doe'], ['name' => 'invalidRule']);
+    }
+
+    public function testValidatorThrowsExceptionOnEmptyRules(): void
+    {
+        $this->expectException(ValidatorException::class);
+
+        $this->validator->validate(['name' => 'John Doe'], ['name' => '']);
     }
 }

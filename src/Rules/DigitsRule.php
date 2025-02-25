@@ -16,7 +16,7 @@ class DigitsRule extends AbstractRule
     {
         $this->countRequiredParams(1, $parameters, 'digits');
 
-        return is_string($value) && !preg_match('/[^0-9]/', $value) && strlen((string)$value) == $parameters[0];
+        return is_string($value) && !preg_match('/[^0-9]/', $value) && strlen($value) == $parameters[0];
     }
 
     /**

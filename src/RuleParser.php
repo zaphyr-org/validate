@@ -36,7 +36,9 @@ class RuleParser
             [$name, $parameter] = $this->splitRuleParameters($rule);
 
             // Ensure commas are not interpreted as parameter separators for regex rules
-            $parameters = in_array($name, ['regex', 'not_regex'], true) ? [$parameter] : str_getcsv($parameter, escape: "");
+            $parameters = in_array($name, ['regex', 'not_regex'], true)
+                ? [$parameter]
+                : str_getcsv($parameter, escape: "");
         }
 
         return $parameters;
