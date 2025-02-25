@@ -76,7 +76,13 @@ class Validator implements ValidatorInterface
                 continue;
             }
 
-            foreach (explode('|', $rules[$field]) as $rule) {
+            $ruleList = explode('|', $rules[$field]);
+
+            if ($this->isNullableValue($ruleList, $value)) {
+                continue;
+            }
+
+            foreach ($ruleList as $rule) {
                 $this->validateInput($inputs, $field, $value, $rule);
 
                 if ($this->shouldStopValidating($field)) {
@@ -101,9 +107,20 @@ class Validator implements ValidatorInterface
         $ruleParameters = $this->ruleParser->getRuleParameters($rule);
         $ruleInstance = $this->getRule($ruleName);
 
-        if (!$this->hasRule('nullable') && !$ruleInstance->validate($field, $value, $ruleParameters, $inputs)) {
+        if (!$ruleInstance->validate($field, $value, $ruleParameters, $inputs)) {
             $this->messageBag->add($field, $ruleInstance, $ruleParameters);
         }
+    }
+
+    /**
+     * @param list<string> $ruleList
+     * @param mixed        $value
+     *
+     * @return bool
+     */
+    protected function isNullableValue(array $ruleList, mixed $value): bool
+    {
+        return in_array('nullable', $ruleList, true) && $value === null;
     }
 
     /**

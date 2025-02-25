@@ -97,6 +97,27 @@ class ValidatorTest extends TestCase
         self::assertTrue($this->validator->isValid());
     }
 
+    public function testValidateWithNullRuleDoesNotIgnoreFollowingValidationFields(): void
+    {
+        $inputs = [
+            'value' => null,
+            'another_value' => null
+        ];
+
+        $rules = [
+            'value' => 'nullable|min_number:20',
+            'another_value' => 'required',
+        ];
+
+        $this->validator->validate($inputs, $rules);
+
+        self::assertEquals(
+            'The another value field is required',
+            $this->validator->errors()->first('another_value')
+        );
+        self::assertFalse($this->validator->isValid());
+    }
+
     public function testValidatorCachesResolvedRuleInstances(): void
     {
         $validator = new Validator();
