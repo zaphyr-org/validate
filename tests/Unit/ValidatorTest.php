@@ -121,6 +121,33 @@ class ValidatorTest extends TestCase
         self::assertFalse($this->validator->isValid());
     }
 
+    public function testValidateWithMultipleNullableRuless(): void
+    {
+        $inputs = [
+            'value' => null,
+            'another_value' => null,
+            'foo' => '',
+        ];
+
+        $rules = [
+            'value' => 'nullable|min_number:20',
+            'another_value' => 'required',
+            'foo' => 'nullable|required',
+        ];
+
+        $this->validator->validate($inputs, $rules);
+
+        self::assertEquals(
+            'The another value field is required',
+            $this->validator->errors()->first('another_value')
+        );
+        self::assertEquals(
+            'The foo field is required',
+            $this->validator->errors()->first('foo')
+        );
+        self::assertFalse($this->validator->isValid());
+    }
+
     public function testValidatorCachesResolvedRuleInstances(): void
     {
         $validator = new Validator();

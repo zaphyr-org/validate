@@ -71,18 +71,19 @@ class Validator implements ValidatorInterface
             $callback($this);
         }
 
-        foreach ($inputs as $field => $value) {
-            if (!isset($rules[$field])) {
-                continue;
-            }
-
-            $ruleList = explode('|', $rules[$field]);
+        foreach ($rules as $field => $fieldRules) {
+            $value = $inputs[$field] ?? null;
+            $ruleList = explode('|', $fieldRules);
 
             if ($this->isNullableValue($ruleList, $value)) {
                 continue;
             }
 
             foreach ($ruleList as $rule) {
+                if ($rule === 'nullable') {
+                    continue;
+                }
+
                 $this->validateInput($inputs, $field, $value, $rule);
 
                 if ($this->shouldStopValidating($field)) {
