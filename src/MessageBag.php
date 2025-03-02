@@ -34,13 +34,31 @@ class MessageBag
     }
 
     /**
+     * @param string $field
+     * @param string $translationId
+     *
+     * @return void
+     */
+    public function addMessage(string $field, string $translationId): void
+    {
+        $message = $translationId;
+        $translation = $this->getTranslation($translationId);
+
+        if ($translation) {
+            $message = $this->replacePlaceholder($translation, $field);
+        }
+
+        $this->messages[$field][] = $message;
+    }
+
+    /**
      * @param string                  $field
      * @param RuleInterface           $rule
      * @param array<int, string|null> $parameters
      *
      * @return void
      */
-    public function add(string $field, RuleInterface $rule, array $parameters): void
+    public function addRuleMessage(string $field, RuleInterface $rule, array $parameters): void
     {
         $message = $this->getMessage($field, $rule, $parameters);
 

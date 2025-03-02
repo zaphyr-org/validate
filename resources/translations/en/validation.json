@@ -46,6 +46,7 @@
         "string": "The %field% must be at least %min% characters"
     },
     "not": {
+        "allowed": "%Field% was not expected",
         "regex": "The %field% format is invalid"
     },
     "number": "The %field% must be a number",

@@ -85,6 +85,42 @@ class ValidatorTest extends TestCase
         self::assertTrue($this->validator->isValid());
     }
 
+    public function testValidateWithAllowExtraInputsIsFalse(): void
+    {
+        $inputs = [
+            'name' => 'merloxx',
+            'position' => 'head of bullshit',
+            'surname' => 'xxolrem',
+        ];
+
+        $rules = [
+            'name' => 'required',
+            'surname' => 'required',
+        ];
+
+        $this->validator->validate($inputs, $rules, allowExtraInputs: false);
+
+        self::assertFalse($this->validator->isValid());
+        self::assertEquals(
+            'Position was not expected',
+            $this->validator->errors()->first('position')
+        );
+    }
+
+    public function testValidateRequiredOnMissingInputFields(): void
+    {
+        $inputs = [];
+        $rules = ['name' => 'required'];
+
+        $this->validator->validate($inputs, $rules);
+
+        self::assertFalse($this->validator->isValid());
+        self::assertEquals(
+            'The name field is required',
+            $this->validator->errors()->first('name')
+        );
+    }
+
     public function testValidateReturnsTrueOnNullableRule(): void
     {
         $inputs = [
@@ -121,7 +157,7 @@ class ValidatorTest extends TestCase
         self::assertFalse($this->validator->isValid());
     }
 
-    public function testValidateWithMultipleNullableRuless(): void
+    public function testValidateWithMultipleNullableRules(): void
     {
         $inputs = [
             'value' => null,

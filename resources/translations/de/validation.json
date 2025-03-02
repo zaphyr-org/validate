@@ -46,6 +46,7 @@
         "string": "%Field% muss mindestens %min% Zeichen lang sein"
     },
     "not": {
+        "allowed": "%Field% sollte nicht vorhanden sein",
         "regex": "%Field% Format ist ungültig"
     },
     "number": "%Field% darf nur aus Nummern bestehen",

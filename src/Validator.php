@@ -55,13 +55,16 @@ class Validator implements ValidatorInterface
     }
 
     /**
+     * @todo refactor this method into smaller methods
+     *
      * {@inheritdoc}
      */
     public function validate(
         array $inputs,
         array $rules,
         array $customMessages = [],
-        array $customFieldReplacers = []
+        array $customFieldReplacers = [],
+        bool $allowExtraInputs = true
     ): void {
         $this->messageBag->clear();
         $this->messageBag->setCustomMessages($customMessages);
@@ -69,6 +72,14 @@ class Validator implements ValidatorInterface
 
         foreach ($this->beforeValidationHooks as $callback) {
             $callback($this);
+        }
+
+        if (!$allowExtraInputs) {
+            $extraFields = array_diff(array_keys($inputs), array_keys($rules));
+
+            foreach ($extraFields as $extraField) {
+                $this->messageBag->addMessage($extraField, 'not.allowed');
+            }
         }
 
         foreach ($rules as $field => $fieldRules) {
@@ -109,7 +120,7 @@ class Validator implements ValidatorInterface
         $ruleInstance = $this->getRule($ruleName);
 
         if (!$ruleInstance->validate($field, $value, $ruleParameters, $inputs)) {
-            $this->messageBag->add($field, $ruleInstance, $ruleParameters);
+            $this->messageBag->addRuleMessage($field, $ruleInstance, $ruleParameters);
         }
     }
 

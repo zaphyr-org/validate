@@ -18,6 +18,7 @@ interface ValidatorInterface
      * @param array<string, string> $rules
      * @param array<string, string> $customMessages
      * @param array<string, mixed>  $customFieldReplacers
+     * @param bool                  $allowExtraInputs
      *
      * @throws ValidatorException If validation rule is not available
      * @return void
@@ -26,7 +27,8 @@ interface ValidatorInterface
         array $inputs,
         array $rules,
         array $customMessages = [],
-        array $customFieldReplacers = []
+        array $customFieldReplacers = [],
+        bool $allowExtraInputs = true
     ): void;
 
     /**
