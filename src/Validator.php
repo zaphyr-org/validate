@@ -55,8 +55,6 @@ class Validator implements ValidatorInterface
     }
 
     /**
-     * @todo refactor this method into smaller methods
-     *
      * {@inheritdoc}
      */
     public function validate(
@@ -66,22 +64,56 @@ class Validator implements ValidatorInterface
         array $customFieldReplacers = [],
         bool $allowExtraInputs = true
     ): void {
-        $this->messageBag->clear();
-        $this->messageBag->setCustomMessages($customMessages);
-        $this->messageBag->setCustomFieldReplacers($customFieldReplacers);
+        $this->initializeValidation($customMessages, $customFieldReplacers);
 
         foreach ($this->beforeValidationHooks as $callback) {
             $callback($this);
         }
 
         if (!$allowExtraInputs) {
-            $extraFields = array_diff(array_keys($inputs), array_keys($rules));
-
-            foreach ($extraFields as $extraField) {
-                $this->messageBag->addMessage($extraField, 'not.allowed');
-            }
+            $this->validateExtraInputs($inputs, $rules);
         }
 
+        $this->validateAllInputs($inputs, $rules);
+    }
+
+    /**
+     * @param array<string, string> $customMessages
+     * @param array<string, mixed>  $customFieldReplacers
+     *
+     * @return void
+     */
+    protected function initializeValidation(array $customMessages, array $customFieldReplacers): void
+    {
+        $this->messageBag->clear();
+        $this->messageBag->setCustomMessages($customMessages);
+        $this->messageBag->setCustomFieldReplacers($customFieldReplacers);
+    }
+
+    /**
+     * @param array<string, mixed>  $inputs
+     * @param array<string, string> $rules
+     *
+     * @return void
+     */
+    protected function validateExtraInputs(array $inputs, array $rules): void
+    {
+        $extraFields = array_diff(array_keys($inputs), array_keys($rules));
+
+        foreach ($extraFields as $extraField) {
+            $this->messageBag->addMessage($extraField, 'not.allowed');
+        }
+    }
+
+    /**
+     * @param array<string, mixed>  $inputs
+     * @param array<string, string> $rules
+     *
+     * @throws ValidatorException
+     * @return void
+     */
+    protected function validateAllInputs(array $inputs, array $rules): void
+    {
         foreach ($rules as $field => $fieldRules) {
             $value = $inputs[$field] ?? null;
             $ruleList = explode('|', $fieldRules);
